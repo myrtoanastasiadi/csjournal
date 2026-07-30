@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why was CS Journal created?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root { 
+      --ink:#fff0f2; 
+      --muted:#dda0a8; 
+      --accent:#ff4d6d; 
+      --line:rgba(255,77,109,.22); 
+      --panel:rgba(40,10,18,.55); 
+      --glow-one:#800f2f; 
+      --glow-two:#590d22; 
+      --glow-three:#a4133c; 
+      --page-one:#0a0204; 
+      --page-two:#180509; 
+      --page-three:#2b0810; 
+      --tag-bg:rgba(255,77,109,.12); 
+      --tag-text:#ffccd5; 
+      --grid-color:rgba(255,77,109,.08); 
+    }
+
+    [data-theme="light"] { 
+      --ink:#2b0810; 
+      --muted:#7a4a53; 
+      --accent:#c9184a; 
+      --line:rgba(201,24,74,.18); 
+      --panel:rgba(255,255,255,.85); 
+      --glow-one:rgba(255,179,193,.45); 
+      --glow-two:rgba(255,204,213,.35); 
+      --glow-three:rgba(255,229,233,.25); 
+      --page-one:#fff8f9; 
+      --page-two:#fff0f2; 
+      --page-three:#ffe5e9; 
+      --tag-bg:rgba(201,24,74,.08); 
+      --tag-text:#800f2f; 
+      --grid-color:rgba(201,24,74,.08); 
+    }
+
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body { 
+      color: var(--ink); font-family: 'Manrope', system-ui, sans-serif; line-height: 1.7; 
+      padding: 2rem 1rem; min-height: 100vh;
+      background:radial-gradient(circle at 92% 3%,var(--glow-one) 0,transparent 29rem),
+                 radial-gradient(circle at 8% 38%,var(--glow-two) 0,transparent 34rem),
+                 radial-gradient(circle at 50% 100%,var(--glow-three) 0,transparent 38rem),
+                 linear-gradient(135deg,var(--page-one) 0%,var(--page-two) 45%,var(--page-three) 100%); 
+      transition: background .45s ease, color .3s ease;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .article-container { 
+      max-width: 720px; margin: 0 auto; background: var(--panel); 
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
+      border: 1px solid var(--line); border-radius: 16px; padding: 2.5rem; 
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+    }
+
+    .article-nav { margin-bottom: 2rem; display:flex; justify-content:space-between; align-items:center; }
+    .back-link { color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.9rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--accent); }
+
+    .theme-toggle { 
+      padding:.45rem .6rem; border:1px solid var(--line); border-radius:8px; 
+      background:transparent; color:var(--ink); cursor:pointer; display:inline-flex; 
+      align-items:center; gap:.4rem; font:500 .64rem "DM Mono",monospace; transition:all .2s;
+    }
+    .theme-toggle:hover { border-color:var(--accent); color:var(--accent); }
+    .theme-toggle svg { width:14px; height:14px; fill:currentColor; }
+
+    .meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .badge-event { 
+      background: var(--tag-bg); color: var(--tag-text); border: 1px solid var(--line); 
+      padding: 0.25rem 0.6rem; border-radius: 999px; font-family: 'DM Mono', monospace; 
+      font-size: 0.75rem; text-transform: uppercase; 
+    }
+    .date { color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.85rem; }
+
+    .article-header h1 { font-size: 2rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem; color: var(--ink); }
+    .subtitle { font-size: 1.05rem; color: var(--muted); }
+    .divider { border: 0; height: 1px; background: var(--line); margin: 2rem 0; }
+
+    .article-content h2 { font-size: 1.35rem; font-weight: 700; margin: 2rem 0 1rem 0; color: var(--ink); }
+    .article-content h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.75rem 0; }
+    .article-content p { margin-bottom: 1.2rem; color: var(--ink); opacity: 0.9; }
+
+    .callout-box { 
+      background: var(--tag-bg); border-left: 3px solid var(--accent); 
+      padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; font-size: 0.95rem; 
+    }
+    blockquote { border-left: 2px solid var(--line); padding-left: 1.2rem; margin: 1.5rem 0; font-style: italic; color: var(--muted); }
+    .article-content ul { margin: 1rem 0 1.5rem 1.5rem; }
+    .article-content li { margin-bottom: 0.5rem; }
+    .article-footer-note { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px dashed var(--line); font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--muted); }
+
+    @media (max-width: 600px) { .article-container { padding: 1.5rem; } .article-header h1 { font-size: 1.6rem; } }
+  </style>
+</head>
+<body>
+
+  <main class="article-container">
+    
+    <nav class="article-nav">
+      <a href="../index.html" class="back-link">← Back to Journal</a>
+      <button class="theme-toggle" type="button" aria-label="Switch theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a1 1 0 0 0 1-1V1a1 1 0 1 0-2 0v2a1 1 0 0 0 1 1Zm0 16a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1ZM4.22 5.64a1 1 0 0 0-1.41-1.42L1.4 5.64a1 1 0 1 0 1.41 1.41l1.41-1.41ZM22.6 5.64l-1.41-1.42a1 1 0 0 0-1.42 1.42l1.42 1.41a1 1 0 0 0 1.41-1.41ZM3 11H1a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2Zm20 0h-2a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2ZM4.22 18.36l-1.41 1.42a1 1 0 1 0 1.41 1.41l1.41-1.41a1 1 0 0 0-1.41-1.42Zm16.97 0a1 1 0 0 0-1.42 1.42l1.42 1.41a1 1 0 0 0 1.41-1.41l-1.41-1.42ZM12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z"/></svg>
+        <span class="theme-label">LIGHT</span>
+      </button>
+    </nav>
+
+    <header class="article-header">
+      <div class="meta">
+        <span class="badge-event">HACKATHON</span>
+        <span class="date">SEPTEMBER 25–26, 2026</span>
+      </div>
+      
+      <h1>Open Hackathon: Challenge #11 — LOST IN SPACE</h1>
+      <p class="subtitle">An ADHD Lived Experience | Team <strong>MVPrompt</strong></p>
+    </header>
+
+    <hr class="divider">
+
+    <article class="article-content">
+      <div class="callout-box">
+        <p><strong>Creator:</strong> Myrto Anastasiadi Alexiou | Informatics Student @ Athens University of Economics and Business</p>
+      </div>
+
+      <h2>A new story</h2>
+      <p>
+        Greetings! My name is Myrto and I'm a 19-year-old CS student at AUEB. 
+        I created CS Journal in order to have the ability to share my journey in the tech world, as I keep learning new things!
+      </p>
+
+      <h2>My interests</h2>
+      <p>
+        My current main interests are Web Development and Machine Learning. Also I am interested in working towards and exploring the world of AI Sustainability. 
+      </p>
+
+      <p class="article-footer-note">
+        Join me on this journey! I would be glad to share knowledge and insights, so we can grow together! 
+      </p>
+    </article>
+  </main>
+
+  <script>
+    const themeToggle = document.querySelector('.theme-toggle');
+    const themeLabel = document.querySelector('.theme-label');
+    const applyTheme = theme => {
+      document.documentElement.dataset.theme = theme;
+      const isLight = theme === 'light';
+      themeLabel.textContent = isLight ? 'DARK' : 'LIGHT';
+    };
+    const savedTheme = localStorage.getItem('journal-theme');
+    applyTheme(savedTheme || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+      applyTheme(nextTheme);
+      localStorage.setItem('journal-theme', nextTheme);
+    });
+  </script>
+</body>
+</html>
