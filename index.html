@@ -1,202 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="CS Journal — Thoughts, updates, and observations on computer science, systems, and learning by Myrto Anastasiadi Alexiou." />
-  <title>CS Journal — Thoughts & Updates</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS Journal</title>
+  
+  <!-- Google Fonts: Inter & DM Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    :root { 
-      /* Dark Theme (Crimson Red Aesthetic) */
-      --ink:#fff0f2; 
-      --muted:#dda0a8; 
-      --accent:#ff4d6d; 
-      --accent-ink:#1a0005; 
-      --line:rgba(255,77,109,.22); 
-      --panel:rgba(40,10,18,.55); 
-      --glow-one:#800f2f; 
-      --glow-two:#590d22; 
-      --glow-three:#a4133c; 
-      --page-one:#0a0204; 
-      --page-two:#180509; 
-      --page-three:#2b0810; 
-      --tag-bg:rgba(255,77,109,.12); 
-      --tag-text:#ffccd5; 
-      --card-hover-bg:rgba(128,15,47,.45); 
-      --card-hover-border:rgba(255,77,109,.7); 
-      --grid-color:rgba(255,77,109,.08); 
+    /* ==========================================================================
+       Root Variables & Reset
+       ========================================================================== */
+    :root {
+      --bg-color: #0d0f12;
+      --card-bg: rgba(22, 27, 34, 0.6);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --card-border-hover: rgba(220, 38, 38, 0.4);
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+      --accent-crimson: #dc2626;
+      --accent-crimson-light: #f87171;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'DM Mono', monospace;
     }
 
-    [data-theme="light"] { 
-      /* Light Theme (Clean Ruby Red Accents) */
-      --ink:#2b0810; 
-      --muted:#7a4a53; 
-      --accent:#c9184a; 
-      --accent-ink:#fff; 
-      --line:rgba(201,24,74,.18); 
-      --panel:rgba(255,255,255,.85); 
-      --glow-one:rgba(255,179,193,.45); 
-      --glow-two:rgba(255,204,213,.35); 
-      --glow-three:rgba(255,229,233,.25); 
-      --page-one:#fff8f9; 
-      --page-two:#fff0f2; 
-      --page-three:#ffe5e9; 
-      --tag-bg:rgba(201,24,74,.08); 
-      --tag-text:#800f2f; 
-      --card-hover-bg:rgba(255,255,255,.98); 
-      --card-hover-border:rgba(201,24,74,.4); 
-      --grid-color:rgba(201,24,74,.08); 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { 
-      margin:0; color:var(--ink); font-family:Manrope,system-ui,sans-serif; 
-      background:radial-gradient(circle at 92% 3%,var(--glow-one) 0,transparent 29rem),
-                 radial-gradient(circle at 8% 38%,var(--glow-two) 0,transparent 34rem),
-                 radial-gradient(circle at 50% 100%,var(--glow-three) 0,transparent 38rem),
-                 linear-gradient(135deg,var(--page-one) 0%,var(--page-two) 45%,var(--page-three) 100%); 
-      overflow-x:hidden; transition:background .45s ease,color .3s ease; min-height:100vh;
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      min-height: 100vh;
     }
-    body::before { 
-      content:""; position:fixed; inset:0; z-index:-1; opacity:.18; pointer-events:none; 
-      background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px); 
-      background-size:64px 64px; mask-image:linear-gradient(to bottom,black,transparent 72%); 
+
+    /* Container */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
     }
-    [data-theme="light"] body::before { opacity:.28; }
 
-    a { color:inherit; text-decoration:none; }
-    .wrap { width:min(900px,calc(100% - 2.5rem)); margin:auto; }
-
-    /* Nav */
-    .nav { height:78px; display:flex; justify-content:space-between; align-items:center; }
-    .mark { font:700 .9rem/1.2 "DM Mono",monospace; letter-spacing:.05em; color:var(--ink); }
-    .mark span { color:var(--accent); }
-    .theme-toggle { 
-      padding:.55rem .65rem; border:1px solid var(--line); border-radius:8px; 
-      background:transparent; color:var(--ink); cursor:pointer; display:inline-flex; 
-      align-items:center; gap:.4rem; font:500 .64rem "DM Mono",monospace; transition:all .2s;
+    /* Header */
+    header.site-header {
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 1.5rem;
     }
-    .theme-toggle:hover { border-color:var(--accent); color:var(--accent); }
-    .theme-toggle svg { width:15px; height:15px; fill:currentColor; }
 
-    /* Header / Intro */
-    .journal-header { padding:4rem 0 3rem; border-bottom:1px solid var(--line); }
-    .eyebrow { color:var(--accent); font:500 .75rem/1 "DM Mono",monospace; letter-spacing:.14em; text-transform:uppercase; margin-bottom:1rem; }
-    h1 { font-size:clamp(2.5rem,6vw,4.2rem); line-height:1; letter-spacing:-.05em; margin:0 0 1.2rem; font-weight:800; }
-    .journal-header p { color:var(--muted); font-size:1.15rem; line-height:1.6; max-width:620px; margin:0; }
-
-    /* Posts Stream */
-    .posts-stream { padding:3rem 0 6rem; display:grid; gap:2rem; }
-    
-    .post-card { 
-      padding:2rem; border:1px solid var(--line); background:var(--panel); 
-      border-radius:12px; transition:transform .25s, border-color .3s, background .35s; 
-      backdrop-filter: blur(8px);
+    header.site-header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
     }
-    .post-card:hover { transform:translateY(-3px); border-color:var(--card-hover-border); background:var(--card-hover-bg); }
-    
-    .post-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; font:400 .75rem "DM Mono",monospace; color:var(--muted); }
-    .post-tag { border:1px solid var(--line); background:var(--tag-bg); color:var(--tag-text); padding:.25rem .6rem; border-radius:999px; }
-    
-    .post-card h2 { font-size:1.5rem; margin:0 0 .8rem; line-height:1.3; letter-spacing:-.02em; color:var(--ink); }
-    .post-card p { color:var(--muted); font-size:.98rem; line-height:1.65; margin:0; }
 
-    /* Footer */
-    footer { border-top:1px solid var(--line); padding:2rem 0; color:var(--muted); font:400 .72rem "DM Mono",monospace; display:flex; justify-content:space-between; align-items:center; }
-    footer a { transition:color .2s; }
-    footer a:hover { color:var(--accent); }
+    header.site-header p {
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+    }
 
-    .reveal { opacity:0; transform:translateY(18px); transition:opacity .55s ease,transform .55s ease; }
-    .reveal.visible { opacity:1; transform:none; }
+    /* ==========================================================================
+       Card Component (Block Style)
+       ========================================================================== */
+    .cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
 
-    @media (max-width:600px) {
-      .wrap { width:min(100% - 2rem,900px); }
-      .journal-header { padding:2.5rem 0 2rem; }
-      .post-card { padding:1.4rem; }
-      footer { flex-direction:column; gap:.8rem; align-items:flex-start; }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--card-border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.08);
+    }
+
+    /* Meta: Badge & Date Alignment */
+    .card .meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .badge {
+      background: rgba(220, 38, 38, 0.15);
+      color: var(--accent-crimson-light);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .date {
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    /* Card Content */
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      line-height: 1.4;
+    }
+
+    .card h3 a {
+      color: var(--text-main);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .card h3 a:hover {
+      color: var(--accent-crimson-light);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .card p strong {
+      color: var(--text-main);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body {
+        padding: 1.5rem 0.8rem;
+      }
+      .card {
+        padding: 1.2rem;
+      }
+      header.site-header h1 {
+        font-size: 1.8rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header class="wrap nav">
-    <a class="mark" href="#">CS<span>JOURNAL</span></a>
-    <button class="theme-toggle" type="button" aria-label="Switch theme">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a1 1 0 0 0 1-1V1a1 1 0 1 0-2 0v2a1 1 0 0 0 1 1Zm0 16a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1ZM4.22 5.64a1 1 0 0 0-1.41-1.42L1.4 5.64a1 1 0 1 0 1.41 1.41l1.41-1.41ZM22.6 5.64l-1.41-1.42a1 1 0 0 0-1.42 1.42l1.42 1.41a1 1 0 0 0 1.41-1.41ZM3 11H1a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2Zm20 0h-2a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2ZM4.22 18.36l-1.41 1.42a1 1 0 1 0 1.41 1.41l1.41-1.41a1 1 0 0 0-1.41-1.42Zm16.97 0a1 1 0 0 0-1.42 1.42l1.42 1.41a1 1 0 0 0 1.41-1.41l-1.41-1.42ZM12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z"/></svg>
-      <span class="theme-label">LIGHT</span>
-    </button>
-  </header>
+  <main class="container">
+    
+    <!-- Site Header -->
+    <header class="site-header">
+      <h1>CS Journal</h1>
+      <p>Developer logs, progress updates & hackathon notes.</p>
+    </header>
 
-  <main class="wrap">
-    <section class="journal-header reveal">
-      <div class="eyebrow">// LOGS, THOUGHTS &amp; OBSERVATIONS</div>
-      <h1>Computer Science<br>Journal.</h1>
-      <p>A faceless archive documenting code, systems architecture, learning updates, and personal takes on tech.</p>
-    </section>
+    <!-- Posts Container -->
+    <section class="cards-list">
 
-    <section class="posts-stream">
-
-      <!-- FIRST POST ENTRY -->
-      <article class="post-card reveal">
-        <div class="post-meta">
-          <time datetime="2026-07-30">JUL 30, 2026</time>
-          <span class="post-tag">#hello-world</span>
-        </div>
-        <h2>001. Why CS Journal Exists</h2>
-        <p>Building a dedicated digital space to log progress, break down tricky CS concepts, and keep a personal timeline of evolution in software and systems.</p>
-      </article>
-      
+      <!-- Open Hackathon Card -->
       <article class="card">
-       <div class="meta">
-        <span class="badge badge-event">HACKATHON</span>
-        <span class="date">26.09.25</span>
-       </div>
-       <h3>
-        <a href="./posts/lost-in-space-hackathon.html">Participating in Open Hackathon: Team MVPrompt & Challenge #11</a>
-       </h3>
-       <p>Joining Open Hackathon on Sept 25–26 with team <strong>MVPrompt</strong>. We're tackling Challenge #11: designing an adaptive AI companion for ADHD support.</p>
-     </article>
+        <div class="meta">
+          <span class="badge">HACKATHON</span>
+          <span class="date">26.09.25</span>
+        </div>
+
+        <h3>
+          <a href="./posts/lost-in-space-hackathon.html">
+            Participating in Open Hackathon: Team MVPrompt & Challenge #11
+          </a>
+        </h3>
+
+        <p>
+          Joining Open Hackathon on Sept 25–26 with team <strong>MVPrompt</strong>. 
+          We're tackling Challenge #11: designing an adaptive AI companion for ADHD support.
+        </p>
+      </article>
 
     </section>
+
   </main>
 
-  <footer class="wrap">
-    <span>BY <a href="https://myrtoanastasiadi.github.io" target="_blank" rel="noreferrer">MYRTO ANASTASIADI ALEXIOU</a></span>
-    <a href="https://github.com/myrtoanastasiadi" target="_blank" rel="noreferrer">GITHUB ↗</a>
-  </footer>
-
-  <script>
-    // Reveal animation on scroll
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if(e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Dark / Light Theme Toggle Engine
-    const themeToggle = document.querySelector('.theme-toggle');
-    const themeLabel = document.querySelector('.theme-label');
-    const applyTheme = theme => {
-      document.documentElement.dataset.theme = theme;
-      const isLight = theme === 'light';
-      themeLabel.textContent = isLight ? 'DARK' : 'LIGHT';
-      themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
-    };
-    const savedTheme = localStorage.getItem('journal-theme');
-    applyTheme(savedTheme || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
-    themeToggle.addEventListener('click', () => {
-      const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-      applyTheme(nextTheme);
-      localStorage.setItem('journal-theme', themeToggle);
-    });
-  </script>
 </body>
 </html>
